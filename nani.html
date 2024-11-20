@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dibujar NANI <3</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      overflow: hidden;
+    }
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="400"></canvas>
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    // Coordenadas de las líneas que forman "NANI"
+    const lines = [
+      // N
+      [50, 300, 50, 100], // Línea vertical izquierda
+      [50, 100, 150, 300], // Diagonal
+      [150, 300, 150, 100], // Línea vertical derecha
+      // A
+      [200, 300, 250, 100], // Lado izquierdo de la A
+      [250, 100, 300, 300], // Lado derecho de la A
+      [220, 200, 280, 200], // Línea horizontal de la A
+      // N
+      [350, 300, 350, 100], // Línea vertical izquierda
+      [350, 100, 450, 300], // Diagonal
+      [450, 300, 450, 100], // Línea vertical derecha
+      // I
+      [500, 100, 500, 300], // Línea vertical de la I
+    ];
+
+    let currentLine = 0;
+
+    canvas.addEventListener("click", () => {
+      if (currentLine < lines.length) {
+        // Dibuja una línea desde el array
+        const [x1, y1, x2, y2] = lines[currentLine];
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 5;
+        ctx.stroke();
+        ctx.closePath();
+        currentLine++;
+      } else if (currentLine === lines.length) {
+        // Dibuja "<3" más grande al final
+        ctx.font = "100px Arial";  // Aumentamos el tamaño de la fuente
+        ctx.fillStyle = "#000";
+        ctx.fillText("<3", 600, 250); // Posición del texto
+        currentLine++;
+      } else {
+        alert("¡Has terminado de dibujar NANI <3!");
+      }
+    });
+  </script>
+</body>
+</html>
